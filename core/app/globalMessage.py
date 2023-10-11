@@ -1,0 +1,7 @@
+SUCCESS_MSG = 'Task was successfully completed!'
+SUCCESS_RESPONSE = '200'
+ERROR_MSG = 'Ops something went wrong'
+ERROR_RESPONSE = '500'
+MESSAGE = 'MSG'
+LOGIN_MEG = 'You are successfully login.'
+REGISTER_MSG = 'Successfully Registered.'
