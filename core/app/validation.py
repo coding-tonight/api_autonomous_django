@@ -1,4 +1,5 @@
 import base64
+import secrets
 
 from django.contrib.auth.models import User
 
@@ -32,3 +33,16 @@ def register_validation(request):
         error_list.append('Password does not match.')
 
     return error_list, username, password, email, is_staff, is_active, is_admin
+
+
+def forget_password_validation(request):
+    data = request.data
+    email = data.get('email')
+    error_list = []
+
+    if not User.objects.filter(email=email).exists():
+        error_list.append('email is not valid')
+
+    token = secrets.token_hex(16)
+
+    return error_list, token, email

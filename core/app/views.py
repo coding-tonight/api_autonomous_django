@@ -3,7 +3,6 @@ from datetime import datetime
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate
-from django.contrib.auth.hashers import BCryptPasswordHasher
 
 from rest_framework.response import Response
 from rest_framework.views import APIView
@@ -13,7 +12,7 @@ from rest_framework import status
 from rest_framework.authtoken.models import Token
 
 from . import globalMessage
-from . validation import login_validation, register_validation
+from . validation import forget_password_validation, login_validation, register_validation
 
 # Create your views here.
 
@@ -64,6 +63,9 @@ class RegisterView(APIView):
 
     def post(self, request, format=None):
         try:
+            if not request.data:   # check if request.data is empty or not
+                return Response({globalMessage.MESSAGE: globalMessage.ERROR_MSG}, status=status.HTTP_406_NOT_ACCEPTABLE)
+
             error_list, username, password, email, is_staff, is_active, is_admin = register_validation(
                 request)
 
@@ -86,4 +88,25 @@ class RegisterView(APIView):
 
 
 class ForgetPasswordView(APIView):
-    pass
+    authentication_classes = []
+
+    def post(self, request):
+        try:
+            error_list, token, email = forget_password_validation(request)
+            # check if email exists or not
+            if error_list:
+                return Response({globalMessage.MESSAGE: "Your Email does not exits.",
+                                 'status': globalMessage.ERROR_MSG
+                                 }, status=status.HTTP_401_UNAUTHORIZED)
+
+            return Response({globalMessage.MESSAGE: globalMessage.SUCCESS_MSG,
+                             'status': globalMessage.SUCCESS_MSG,
+                             'token': token,
+                             'email': email
+                             }, status=status.HTTP_200_OK)
+
+        except Exception as exe:
+            logger.error(str(exe), exc_info=True)
+            return Response({globalMessage.MESSAGE: globalMessage.ERROR_MSG,
+                             'status': globalMessage.ERROR_RESPONSE
+                             }, status=status.HTTP_401_UNAUTHORIZED)
