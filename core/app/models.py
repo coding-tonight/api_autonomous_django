@@ -21,3 +21,9 @@ class Base(models.Model):
 
     class Meta:
         abstract = True
+
+
+class ForgetPasswordOtp(models.Model):
+    otp = models.CharField(max_length=32)
+    email = models.EmailField(max_length=45)
+    created_at = models.DateTimeField(auto_now=False)

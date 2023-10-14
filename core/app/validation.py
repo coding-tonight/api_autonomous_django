@@ -3,6 +3,8 @@ import secrets
 
 from django.contrib.auth.models import User
 
+from app.models import ForgetPasswordOtp
+
 
 def login_validation(request):
     # getting username and password from the  header
@@ -43,6 +45,20 @@ def forget_password_validation(request):
     if not User.objects.filter(email=email).exists():
         error_list.append('email is not valid')
 
-    token = secrets.token_hex(16)
+    otp = secrets.token_hex(3)
 
-    return error_list, token, email
+    return error_list, otp, email
+
+
+def verify_otp_validation(request):
+    data = request.data
+    otp = data.get('otp')
+    error_list = []
+
+    if not ForgetPasswordOtp.objects.filter(otp=otp).exists():
+        error_list.append('Invalid Otp.')
+
+    if not otp:
+        error_list.append('Field can not be null.')
+
+    return error_list, otp

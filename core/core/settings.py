@@ -148,6 +148,9 @@ STATIC_URL = 'static/'
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
+EMAIL_BACKEND = 'smtp.gmail.com'
+EMAIL_HOST = 'smtp.'
+
 
 LOGGING = {
     'version': 1,
