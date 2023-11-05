@@ -25,7 +25,7 @@ class ClientAPI(APIView):
     def get(self, request, format=None):
         try:
             try:
-                list_client = Client.objects.filter(is_delete=False)
+                list_client = Clients.objects.filter(is_delete=False)
 
             except Clients.DoesNotExist as exe:
                 Exception(exe)
