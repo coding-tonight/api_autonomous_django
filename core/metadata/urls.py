@@ -1,6 +1,5 @@
 from django.urls import path
-from metadata.views import MetaDataView
-
+from . import views
 urlpatterns = [
-    path('metadata/', MetaDataView.as_view())
+    path('metadata/', views.MetaDataView.as_view())
 ]

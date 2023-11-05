@@ -43,7 +43,8 @@ INSTALLED_APPS = [
     'rest_framework.authtoken',
     'app.apps.AppConfig',
     'metadata.apps.MetadataConfig',
-    'enquiry.apps.EnquiryConfig'
+    'enquiry.apps.EnquiryConfig',
+    'clients.apps.ClientsConfig',
 ]
 
 MIDDLEWARE = [
@@ -150,6 +151,9 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 EMAIL_BACKEND = 'smtp.gmail.com'
 EMAIL_HOST = 'smtp.'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+MEDIA_URL = '/media/'  # 'http://myhost:port/media/'
 
 
 LOGGING = {

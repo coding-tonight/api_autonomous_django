@@ -1,6 +1,6 @@
 from django.urls import path
-from . views import EnquiryView
+from . import views
 
 urlpatterns = [
-    path('enquires/', EnquiryView.as_view())
+    path('enquires/', views.EnquiryView.as_view())
 ]
