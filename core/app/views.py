@@ -23,7 +23,9 @@ logger = logging.getLogger('django')
 
 
 class AuthView(APIView):
-    # authentication_classes  = [TokenAuthentication]
+    authentication_classes  = []
+    permission_classes = []
+    
     def post(self, request, format=None):
         try:
             username, password = login_validation(
@@ -61,8 +63,8 @@ class AuthView(APIView):
 # for register user only admin can create user , group and access permission
 
 class RegisterView(APIView):
-    authentication_classes = [TokenAuthentication]
-    permission_classes = [IsAdminUser, IsAuthenticated]
+    authentication_classes = []
+    permission_classes = []
 
     def post(self, request, format=None):
         try:
@@ -130,6 +132,7 @@ class ForgetPasswordView(APIView):
 
 class VerifyForgetPassword(APIView):
     authentication_classes = []
+    permission_classes = []
 
     def post(self, request):
         try:
