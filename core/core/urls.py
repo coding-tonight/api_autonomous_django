@@ -22,5 +22,6 @@ urlpatterns = [
     path('', include('app.urls')),
     path('', include('metadata.urls')),
     path('', include('enquiry.urls')),
-    path('', include('clients.urls'))
+    path('', include('clients.urls')),
+    path('', include('docs.urls'))
 ]

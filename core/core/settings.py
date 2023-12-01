@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'metadata.apps.MetadataConfig',
     'enquiry.apps.EnquiryConfig',
     'clients.apps.ClientsConfig',
+    'drf_yasg',
 ]
 
 MIDDLEWARE = [
@@ -186,3 +187,6 @@ LOGGING = {
 
     },
 }
+
+
+BASE_URL = 'http://127.0.0.1:8000/'
