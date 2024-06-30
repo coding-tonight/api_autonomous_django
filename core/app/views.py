@@ -109,7 +109,7 @@ class ForgetPasswordView(APIView):
                 # start smtp server
                 server = SMTP('smtp.gmail.com', 587)
                 server.starttls()
-                server.login('spicyh166@gmail.com', 'qiyokylyqmndmlci')
+                server.login('spicyh166@gmail.com', 'application password')
                 msg = f'Hi {email}  your otp code is {otp}'
                 server.sendmail('spicyh166@gmail.com', email, msg)
                 server.quit()
